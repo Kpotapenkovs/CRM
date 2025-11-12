@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,9 +18,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $response = Http::get('https://deskplan.lv/muita/app.json');
+        $data = $response->json();
+        foreach ($data['users'] as $userData) {
+            User::create([
+                'id' => $userData['id'],
+                'username' => $userData['username'],
+                'full_name' => $userData['full_name'],
+                'role' => $userData['role'],
+                'active' => $userData['active'],
+            ]);
+        }
     }
 }

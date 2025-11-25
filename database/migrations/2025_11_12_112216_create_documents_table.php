@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("mime_type");
             $table->string("category");
             $table->string("pages");
-            $table->string("uploadetd_by");
+            $table->string("uploaded_by");
             $table->timestamps();
         });
     }

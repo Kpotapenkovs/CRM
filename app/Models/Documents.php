@@ -13,6 +13,6 @@ class Documents extends Model
         'mime_type',
         'category',
         'pages',
-        'uploadetd_by'
+        'uploaded_by'
     ];
 }
